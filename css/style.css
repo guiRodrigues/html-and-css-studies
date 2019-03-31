@@ -1,0 +1,78 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* Basic reset CSS: */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* the size of border, padding and width are no longer added to the total siz of the box */
+}
+
+body {
+    font-family: "Lato", sans-serif; /*This font-family will be inherited by all the child elements*/
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777777;
+    padding: 30px; /* padding on the entire page; padding is not getting inherited */
+}
+
+/* Header */
+.header {
+    height: 95vh; /* 95% of Viewport Height */
+    background-image: linear-gradient(
+            to right bottom,
+            rgba(126, 213, 111, 0.8),
+            rgba(40, 180, 131, 0.8)),
+            url("../img/hero.jpg");
+    /* the linear background will appear on the top and the image behind the gradient, then specify the path to the image */
+    background-size: cover; /* it always try to fit all the element inside of the box  */
+    background-position: top; /* the top of the image will always stay on the top of the container {center, top, bottom ...} */
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* specify the polygon to be visible */
+}
+
+.logo-box {
+    position: absolute; /* Needs a reference (to top and left start to count), that reference is the parent element (header) */
+    top: 40px;
+    left: 40px;
+}
+
+.logo {
+    height: 35px;
+    /* the width will be automatically figured out by the browser */
+}
+
+.text-box {
+    /* centralize with absolute positioning */
+    position: absolute;
+    top: 40%; /* with 50%, the element will appear AFTER 50% (top and left) */
+    left: 50%;
+    transform: translate(-50%, -50%); /* x and y, bring the element to half of his size to left and top (genius!) */
+}
+
+.heading-primary {
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.heading-primary-main {
+    display: block; /* to break line */
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+}
