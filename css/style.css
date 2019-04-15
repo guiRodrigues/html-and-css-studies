@@ -56,6 +56,7 @@ body {
     top: 40%; /* with 50%, the element will appear AFTER 50% (top and left) */
     left: 50%;
     transform: translate(-50%, -50%); /* x and y, bring the element to half of his size to left and top (genius!) */
+    text-align: center;
 }
 
 .heading-primary {
@@ -68,6 +69,16 @@ body {
     font-size: 60px;
     font-weight: 400;
     letter-spacing: 35px;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    /*animation-timing-function: ease-in; slow on begin and fast in the end */
+    /*animation-timing-function: ease-out; fast on begin and slow in the end */
+
+    /* animation-iteration-count: 100; */
+    /*animation-delay: 3s;*/
 }
 
 .heading-primary-sub {
@@ -75,4 +86,121 @@ body {
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 17.4px;
+    /* margin for the button */
+    margin-bottom: 60px;
+
+    animation: moveInRight 1s ease-out;
+}
+
+/* Two types of animation:
+        1: Simply use transition property
+
+*/
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80% {
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {transform: translateX(-20px);}
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/* pseudo-classe */
+/* We use pseudo-classes to style elements under a special condition (state) */
+.btn:link,
+.btn:visited {
+    position: relative; /* to put the ::after (pseudo-element) behind of this */
+    text-transform: uppercase;
+    text-decoration: none;
+    /* Color is not defined here, because we have buttons with color #777 and #FFF */
+    padding: 15px 40px;
+    /* By default, it's a inline element (bacause it's simply text), but we should display it as a inline-block => works as a normal block element */
+    display: inline-block;
+    /* As this button is just a text, we can centralize it using text-align on his parent */
+    border-radius: 100px;
+    transition: all .2s;
+    /* Here, "define" the animation */
+}
+
+.btn:hover {
+    transform: translateY(-3px); /* And here, "describe" the animation */
+    box-shadow: /* X */ 0 /* Y */ 10px /* BLUR */ 20px /* COLOR */ rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px); /* In relation to the initial state */
+    /* Button must be more closer */
+    box-shadow: /* X */ 0 /* Y */ 5px /* BLUR */ 10px /* COLOR */ rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/* pseudo-element */
+/* A CSS pseudo-element is used to style specified parts of an element. */
+/* Trick: Add an element that looks exactly like the button that we already have, but we put it behind the button */
+.btn::after {
+    /* always necessary: */
+    content: "";
+    display: inline-block; /* because button is also inline-block */
+    /* This after pseudo-element will have the exact same dimesions */
+    width: 100%; /* 100% of the width of the button */
+    height: 100%;
+    border-radius: 100px;
+    position: absolute; /* put it behind our actual button */
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s; /* to the element increase slow */
+}
+
+.btn-white::after {
+    background-color: #FFF;
+}
+
+.btn:hover::after {
+    /* transform: scale(1.5); it will appear with the 1.5 times the size that it had before */
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; /* to fade out */
+}
+
+.btn-animated {
+    animation: /*ANIM-NAME*/moveInBottom /*ANIM-DURATION*/.5s /*ANIM-TIMING-FUNCTION*/ease-out /*DELAY*/.75s; /* will begin after .75s, different that another animations */
+    animation-fill-mode: backwards; /* will automatically apply the styles of the 0% animation */
 }
